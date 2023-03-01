@@ -2,6 +2,10 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
 
+    //navigation
+    id 'androidx.navigation.safeargs.kotlin'
+
+    //room
     id "kotlin-kapt"
 }
 
@@ -42,6 +46,19 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    //navigation
+    buildscript {
+        repositories {
+            google()
+        }
+        dependencies {
+            //def nav_version = "2.5.3"
+            classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.5.3"
+        }
+    }
+    buildFeatures{
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -57,13 +74,17 @@ dependencies {
     //room
     implementation("androidx.room:room-runtime:2.5.0")
     annotationProcessor("androidx.room:room-compiler:2.5.0")
-    // To use Kotlin annotation processing tool (kapt)
     kapt("androidx.room:room-compiler:2.5.0")
+    //room coroutines
     implementation 'androidx.room:room-ktx:2.5.0'
     kapt "androidx.room:room-compiler:2.5.0"
 
     //coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1'
+
+    // navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"
+    implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
 
 }
