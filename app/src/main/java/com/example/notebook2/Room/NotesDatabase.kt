@@ -10,17 +10,4 @@ import com.example.notebook2.Model.NotesModel
 abstract class NotesDatabase : RoomDatabase() {
 
     abstract fun notesDao() : NotesDao
-
-    companion object{
-        @Volatile
-        private var INSTANCE : NotesDatabase? = null
-
-        fun getDatabase(context: Context) : NotesDatabase{
-            return INSTANCE ?: synchronized(this){
-                val instance = Room.databaseBuilder(context, NotesDatabase::class.java, "notesDatabase").build()
-                INSTANCE = instance
-                instance
-            }
-        }
-    }
 }
