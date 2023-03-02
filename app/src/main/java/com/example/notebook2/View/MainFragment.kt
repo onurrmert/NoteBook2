@@ -15,7 +15,6 @@ import com.example.notebook2.Model.NotesModel
 import com.example.notebook2.ViewModel.MainViewModel
 import com.example.notebook2.databinding.FragmentMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
@@ -60,7 +59,7 @@ class MainFragment : Fragment() {
     }
 
     private fun initRecycler(noteList : List<NotesModel>){
-        val noteList2 = ArrayList<NotesModel>(noteList)
+        val noteList2 = ArrayList<NotesModel>(noteList.sortedBy { it.history })
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = MainAdapter(
             noteList2,

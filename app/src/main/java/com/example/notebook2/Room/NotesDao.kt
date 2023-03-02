@@ -6,7 +6,7 @@ import com.example.notebook2.Model.NotesModel
 @Dao
 interface NotesDao {
 
-    @Query("SELECT * FROM notesTable ORDER BY history DESC")
+    @Query("SELECT * FROM notesTable")
     suspend fun getAllNotes() : List<NotesModel>
 
     @Query("SELECT * FROM notesTable WHERE id = :id")
