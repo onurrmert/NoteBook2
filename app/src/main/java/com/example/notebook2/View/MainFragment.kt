@@ -1,5 +1,6 @@
 package com.example.notebook2.View
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,6 +23,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
+
+    private lateinit var adapter: MainAdapter
 
     private val viewModel by lazy {
         ViewModelProvider(requireActivity(), defaultViewModelProviderFactory).get(MainViewModel::class.java)
@@ -61,9 +64,10 @@ class MainFragment : Fragment() {
     }
 
     private fun initRecycler(noteList : List<NotesModel>){
+
         val noteList2 = ArrayList<NotesModel>(noteList.sortedBy { it.history })
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerView.adapter = MainAdapter(
+
+        adapter = MainAdapter(
             noteList2,
             object : IOnItemClickListener{
                 override fun itemClick(notesModel: NotesModel, view: View) {
@@ -71,15 +75,22 @@ class MainFragment : Fragment() {
                 }
             }
         )
+
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerView.adapter = adapter
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun popUpMenu(notesModel: NotesModel, view: View){
         val popupMenu = PopupMenu(requireContext(), view)
         popupMenu.apply {
             this.inflate(R.menu.popup_menu)
             this.setOnMenuItemClickListener {
                 when(it.itemId){
-                    R.id.deletePopup -> println("silindi")
+                    R.id.deletePopup -> {
+                        viewModel.delete(notesModel.id)
+                        getAllNotes()
+                    }
 
                     R.id.updatePopup ->{
                         goUpdate(notesModel.id)

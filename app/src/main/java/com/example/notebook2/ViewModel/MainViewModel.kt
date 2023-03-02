@@ -19,4 +19,10 @@ class MainViewModel @Inject constructor(private val service: NoteDatabaseService
             notesList.value = service.getNotesDao().getAllNotes()
         }
     }
+
+    fun delete(id : Int){
+        viewModelScope.launch {
+            service.getNotesDao().deleteNote(id)
+        }
+    }
 }
