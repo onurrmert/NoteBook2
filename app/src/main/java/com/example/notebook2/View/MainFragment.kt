@@ -5,11 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.notebook2.Adapter.IOnItemClickListener
+import com.example.notebook2.Adapter.MainAdapter
+import com.example.notebook2.Model.NotesModel
 import com.example.notebook2.ViewModel.MainViewModel
 import com.example.notebook2.databinding.FragmentMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
@@ -36,11 +42,34 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getAllNote()
+        getAllNotes()
 
         binding.addBtn.setOnClickListener {
             goInsert()
         }
+    }
+
+    private fun getAllNotes(){
+
+        viewModel.getAllNote()
+
+        viewModel.notesList.observe(viewLifecycleOwner, {
+            if (it.size > 0) initRecycler(it)
+            else Toast.makeText(requireContext(), "Note not found", Toast.LENGTH_SHORT).show()
+        })
+    }
+
+    private fun initRecycler(noteList : List<NotesModel>){
+        val noteList2 = ArrayList<NotesModel>(noteList)
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerView.adapter = MainAdapter(
+            noteList2,
+            object : IOnItemClickListener{
+                override fun itemClick(notesModel: NotesModel) {
+                    println(notesModel.title)
+                }
+            }
+        )
     }
 
     private fun goInsert(){
