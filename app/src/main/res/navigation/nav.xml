@@ -56,6 +56,9 @@
             app:destination="@id/mainFragment"
             app:popUpTo="@id/noteDetailFragment"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/updateFragment"

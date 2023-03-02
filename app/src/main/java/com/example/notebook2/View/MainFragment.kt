@@ -1,6 +1,8 @@
 package com.example.notebook2.View
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -80,7 +82,6 @@ class MainFragment : Fragment() {
         binding.recyclerView.adapter = adapter
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private fun popUpMenu(notesModel: NotesModel, view: View){
         val popupMenu = PopupMenu(requireContext(), view)
         popupMenu.apply {
@@ -88,8 +89,7 @@ class MainFragment : Fragment() {
             this.setOnMenuItemClickListener {
                 when(it.itemId){
                     R.id.deletePopup -> {
-                        viewModel.delete(notesModel.id)
-                        getAllNotes()
+                        delete(notesModel.id)
                     }
 
                     R.id.updatePopup ->{
@@ -98,6 +98,19 @@ class MainFragment : Fragment() {
                 }
                 return@setOnMenuItemClickListener true
             }
+        }.show()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun delete(id : Int){
+        val dialog = AlertDialog.Builder(requireContext())
+        dialog.apply {
+            this.setMessage("Do you want delete?")
+            this.setPositiveButton("DELETE", DialogInterface.OnClickListener { dialog, which ->
+                viewModel.delete(id)
+                adapter.notifyDataSetChanged()
+                getAllNotes()
+            })
         }.show()
     }
 

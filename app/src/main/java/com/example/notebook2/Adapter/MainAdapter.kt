@@ -3,9 +3,11 @@ package com.example.notebook2.Adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notebook2.Model.NotesModel
 import com.example.notebook2.R
+import com.example.notebook2.View.MainFragmentDirections
 import com.example.notebook2.databinding.MainRecyclerRowBinding
 
 class MainAdapter (
@@ -37,5 +39,14 @@ class MainAdapter (
         holder.binding.imagePopup.setOnClickListener {
             listener.itemClick(noteList.get(position), it)
         }
+
+        holder.binding.recyclerRow.setOnClickListener {
+            goDetail(noteList.get(position).id, it)
+        }
+    }
+
+    private fun goDetail(id: Int, view: View){
+        val direction = MainFragmentDirections.actionMainFragmentToNoteDetailFragment(id)
+        Navigation.findNavController(view).navigate(direction)
     }
 }
