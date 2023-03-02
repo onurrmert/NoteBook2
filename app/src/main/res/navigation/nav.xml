@@ -13,6 +13,10 @@
         <action
             android:id="@+id/action_splashFragment_to_mainFragment"
             app:destination="@id/mainFragment"
+            app:enterAnim="@anim/righttoleft1"
+            app:exitAnim="@anim/rigthtoleft2"
+            app:popEnterAnim="@anim/lefttorigth1"
+            app:popExitAnim="@anim/lefttorigth2"
             app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true" />
     </fragment>
@@ -20,5 +24,48 @@
         android:id="@+id/mainFragment"
         android:name="com.example.notebook2.View.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_insertNoteFragment"
+            app:destination="@id/insertNoteFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_noteDetailFragment"
+            app:destination="@id/noteDetailFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_updateFragment"
+            app:destination="@id/updateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/insertNoteFragment"
+        android:name="com.example.notebook2.View.InsertNoteFragment"
+        android:label="fragment_insert_note"
+        tools:layout="@layout/fragment_insert_note" >
+        <action
+            android:id="@+id/action_insertNoteFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/insertNoteFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/noteDetailFragment"
+        android:name="com.example.notebook2.View.NoteDetailFragment"
+        android:label="fragment_note_detail"
+        tools:layout="@layout/fragment_note_detail" >
+        <action
+            android:id="@+id/action_noteDetailFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/noteDetailFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateFragment"
+        android:name="com.example.notebook2.View.UpdateFragment"
+        android:label="fragment_update"
+        tools:layout="@layout/fragment_update" >
+        <action
+            android:id="@+id/action_updateFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/updateFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

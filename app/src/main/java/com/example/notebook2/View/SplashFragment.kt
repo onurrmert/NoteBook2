@@ -16,8 +16,6 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class SplashFragment : Fragment() {
 
-    private lateinit var binding: FragmentSplashBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -27,12 +25,13 @@ class SplashFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding = FragmentSplashBinding.inflate(inflater, container, false)
+        val binding = FragmentSplashBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         CoroutineScope(Dispatchers.Main).launch {
             delay(1000)
             val direction = SplashFragmentDirections.actionSplashFragmentToMainFragment()

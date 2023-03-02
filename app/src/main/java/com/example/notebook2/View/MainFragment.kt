@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.example.notebook2.ViewModel.MainViewModel
 import com.example.notebook2.databinding.FragmentMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,6 +35,16 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         viewModel.getAllNote()
+
+        binding.addBtn.setOnClickListener {
+            goInsert()
+        }
+    }
+
+    private fun goInsert(){
+        val direction = MainFragmentDirections.actionMainFragmentToInsertNoteFragment()
+        Navigation.findNavController(requireView()).navigate(direction)
     }
 }

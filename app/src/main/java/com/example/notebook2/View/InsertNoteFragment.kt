@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.notebook2.databinding.FragmentInsertNoteBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class InsertNoteFragment : Fragment() {
 
     private lateinit var binding: FragmentInsertNoteBinding
