@@ -35,7 +35,7 @@ class MainAdapter (
         holder.binding.titleText.text = noteList.get(position).title
 
         holder.binding.imagePopup.setOnClickListener {
-            listener.itemClick(noteList.get(position))
+            listener.itemClick(noteList.get(position), it)
         }
     }
 }

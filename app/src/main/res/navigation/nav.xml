@@ -62,6 +62,9 @@
         android:name="com.example.notebook2.View.UpdateFragment"
         android:label="fragment_update"
         tools:layout="@layout/fragment_update" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
         <action
             android:id="@+id/action_updateFragment_to_mainFragment"
             app:destination="@id/mainFragment"

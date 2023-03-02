@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.notebook2.Adapter.IOnItemClickListener
 import com.example.notebook2.Adapter.MainAdapter
 import com.example.notebook2.Model.NotesModel
+import com.example.notebook2.R
 import com.example.notebook2.ViewModel.MainViewModel
 import com.example.notebook2.databinding.FragmentMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -64,11 +66,33 @@ class MainFragment : Fragment() {
         binding.recyclerView.adapter = MainAdapter(
             noteList2,
             object : IOnItemClickListener{
-                override fun itemClick(notesModel: NotesModel) {
-                    println(notesModel.title)
+                override fun itemClick(notesModel: NotesModel, view: View) {
+                    popUpMenu(notesModel, view)
                 }
             }
         )
+    }
+
+    private fun popUpMenu(notesModel: NotesModel, view: View){
+        val popupMenu = PopupMenu(requireContext(), view)
+        popupMenu.apply {
+            this.inflate(R.menu.popup_menu)
+            this.setOnMenuItemClickListener {
+                when(it.itemId){
+                    R.id.deletePopup -> println("silindi")
+
+                    R.id.updatePopup ->{
+                        goUpdate(notesModel.id)
+                    }
+                }
+                return@setOnMenuItemClickListener true
+            }
+        }.show()
+    }
+
+    private fun goUpdate(id : Int){
+        val direction = MainFragmentDirections.actionMainFragmentToUpdateFragment(id)
+        Navigation.findNavController(requireView()).navigate(direction)
     }
 
     private fun goInsert(){
