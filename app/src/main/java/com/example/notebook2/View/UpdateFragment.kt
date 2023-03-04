@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.notebook2.Model.NotesModel
@@ -37,6 +38,8 @@ class UpdateFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        backPressed()
 
         getNote()
 
@@ -76,5 +79,14 @@ class UpdateFragment : Fragment() {
         val bundle = arguments
         val args = UpdateFragmentArgs.fromBundle(bundle!!)
         return args.id
+    }
+
+    private fun backPressed(){
+        requireActivity().onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true){
+                override fun handleOnBackPressed() {
+                    goMain()
+                }
+            })
     }
 }

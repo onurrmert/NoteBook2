@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.example.notebook2.ViewModel.NoteDetailViewModel
 import com.example.notebook2.databinding.FragmentNoteDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,6 +35,9 @@ class NoteDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        backPressed()
+
         getNote()
     }
 
@@ -50,5 +55,15 @@ class NoteDetailFragment : Fragment() {
         val bundle = arguments
         val args = NoteDetailFragmentArgs.fromBundle(bundle!!)
         return args.id
+    }
+
+    private fun backPressed(){
+        requireActivity().onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true){
+                override fun handleOnBackPressed() {
+                    val direction = NoteDetailFragmentDirections.actionNoteDetailFragmentToMainFragment()
+                    Navigation.findNavController(requireView()).navigate(direction)
+                }
+            })
     }
 }

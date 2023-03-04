@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".View.InsertNoteFragment">
 
     <LinearLayout
@@ -26,6 +28,7 @@
             android:background="@drawable/edit_text_bacground"
             android:ems="10"
             android:hint="Title"
+            android:textColorHint="#9A9696"
             android:inputType="textPersonName"
             android:paddingLeft="10dp"
             android:text=""
@@ -41,6 +44,7 @@
             android:ems="10"
             android:gravity="start|top"
             android:hint="Note"
+            android:textColorHint="#9A9696"
             android:inputType="textMultiLine"
             android:paddingLeft="10dp"
             android:textColor="#000000" />
@@ -52,6 +56,7 @@
             android:layout_gravity="center"
             android:onClick="saveButton"
             android:text="Save"
-            android:textColor="@color/black" />
+            android:backgroundTint="@color/blue"
+            android:textColor="@color/white" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,12 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.notebook2.Model.NotesModel
 import com.example.notebook2.Util.MyDate.Companion.myDate
 import com.example.notebook2.ViewModel.InsertViewModel
-import com.example.notebook2.ViewModel.MainViewModel
 import com.example.notebook2.databinding.FragmentInsertNoteBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -39,6 +39,8 @@ class InsertNoteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        backPressed()
+
         binding.insertBtn.setOnClickListener {
             getNote()
         }
@@ -59,5 +61,13 @@ class InsertNoteFragment : Fragment() {
     private fun goMain(){
         val direction = InsertNoteFragmentDirections.actionInsertNoteFragmentToMainFragment()
         Navigation.findNavController(requireView()).navigate(direction)
+    }
+    private fun backPressed(){
+        requireActivity().onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true){
+                override fun handleOnBackPressed() {
+                    goMain()
+                }
+            })
     }
 }

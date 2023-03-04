@@ -27,13 +27,31 @@
         tools:layout="@layout/fragment_main" >
         <action
             android:id="@+id/action_mainFragment_to_insertNoteFragment"
-            app:destination="@id/insertNoteFragment" />
+            app:destination="@id/insertNoteFragment"
+            app:enterAnim="@anim/righttoleft1"
+            app:exitAnim="@anim/rigthtoleft2"
+            app:popEnterAnim="@anim/lefttorigth1"
+            app:popExitAnim="@anim/lefttorigth2"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_mainFragment_to_noteDetailFragment"
-            app:destination="@id/noteDetailFragment" />
+            app:destination="@id/noteDetailFragment"
+            app:enterAnim="@anim/righttoleft1"
+            app:exitAnim="@anim/rigthtoleft2"
+            app:popEnterAnim="@anim/lefttorigth1"
+            app:popExitAnim="@anim/lefttorigth2"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_mainFragment_to_updateFragment"
-            app:destination="@id/updateFragment" />
+            app:destination="@id/updateFragment"
+            app:enterAnim="@anim/righttoleft1"
+            app:exitAnim="@anim/rigthtoleft2"
+            app:popEnterAnim="@anim/lefttorigth1"
+            app:popExitAnim="@anim/lefttorigth2"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/insertNoteFragment"
